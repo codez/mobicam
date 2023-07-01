@@ -14,6 +14,7 @@ set :bind, '0.0.0.0'
 set :server, :puma
 set :haml, format: :html5
 
+CHUNK_SIZE = 65536
 UPLOAD_DIR = ENV['UPLOAD_DIR'] || './uploads'
 FileUtils.mkdir_p(UPLOAD_DIR)
 
@@ -26,7 +27,7 @@ end
 
 post '/' do
   if params[:upload] && params[:upload][:tempfile]
-    copy_file(params[:upload][:tempfile], File.extname(params[:upload][:filename]))
+    copy_file(params[:upload][:tempfile], params[:upload][:filename])
   else
     haml :index
   end
@@ -43,11 +44,11 @@ end
 ### HELPERS
 
 helpers do
-  def copy_file(stream, extension)
-    filename = Time.now.strftime('%Y%m%d%H%M%S') + extension
+  def copy_file(stream, filename)
+    filename = Time.now.strftime('%Y%m%d%H%M%S') + normalized_extension(filename)
     tempfile = File.join(Dir.tmpdir, filename)
     File.open(tempfile, 'wb') do |f|
-      while chunk = stream.read(65536)
+      while chunk = stream.read(CHUNK_SIZE)
         f.write(chunk)
       end
     end
@@ -56,6 +57,11 @@ helpers do
   rescue => e
     logger.error(e)
     [500, e.message]
+  end
+
+  def normalized_extension(filename)
+    extension = File.extname(filename).downcase
+    extension == '.jpeg' ? '.jpg' : extension
   end
 
   def random_gradient
