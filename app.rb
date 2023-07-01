@@ -32,6 +32,14 @@ post '/' do
   end
 end
 
+get '/uploads' do
+  JSON.dump({ uploads: Dir.children(UPLOAD_DIR).sort })
+end
+
+get '/uploads/:name.:ext' do
+  send_file(File.join(UPLOAD_DIR, "#{params[:name]}.#{params[:ext]}"))
+end
+
 ### HELPERS
 
 helpers do
