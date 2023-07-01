@@ -6,6 +6,7 @@ html {
 body {
   height: 100%;
   margin: 0 auto;
+  padding: 20px;
   text-align: center;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 24px;
@@ -17,6 +18,11 @@ body {
   position: relative;
 }
 
+h1 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 36px;
+}
 
 @media only screen and (max-width: 960px) {
   #info {
@@ -24,11 +30,6 @@ body {
   }
 }
 
-@media only screen and (max-width: 800px) {
-  #info {
-    margin-top: 50px;
-  }
-}
 
 @media only screen and (min-width: 961px) {
   #info {
@@ -40,12 +41,12 @@ body {
   display: inline-block;
   width: 200px;
   height: 200px;
-  border: 20px solid black;
+  border: 8px solid black;
   border-radius: 200px;
-  background-image: url(cam.svg);
+  background-image: url(camera.svg);
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-size: 80.7%;
+  background-size: 70%;
 }
 
 .custom-file {

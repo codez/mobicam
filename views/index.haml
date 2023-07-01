@@ -1,17 +1,17 @@
 %p#info
-  Nimm hier dein Video auf
-  %br/
-  (max. eine Minute)
+  %h1 KI Wunderland
+  Nimm hier dein Foto auf
 
-%form#form{action: '/', method: 'POST', enctype: 'multipart/form-data'}
+%form#form{action: '.', method: 'POST', enctype: 'multipart/form-data'}
   .custom-file
     #cam
-    %input{type: 'file', id: 'file', name: 'video', accept: 'video/*', capture: true}
+    %input#file{type: 'file', name: 'upload', accept: 'image/*', capture: true}
 
 #progress
   .pie-wrapper
     %span.label
-      <span id="progress-number">0</span><span class="smaller">%</span>
+      %span#progress-number> 0
+      %span.smaller %
     #pie.pie
       #left-side.half-circle
       #right-side.half-circle

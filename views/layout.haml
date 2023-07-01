@@ -2,11 +2,12 @@
 
 %html
   %head
+    %base{href: ENV["BASE_HREF"] || "/"}
     %meta{charset: 'utf-8'}
     %meta{http_equiv: 'X-UA-Compatible', content: 'IE=edge'}
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'}
 
-    %title record.now
+    %title Foto
 
     %link{href: 'style.css', rel: 'stylesheet'}
 
@@ -20,4 +21,4 @@
       }
 
   %body
-    = yield
+    != yield

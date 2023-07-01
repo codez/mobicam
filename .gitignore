@@ -1,2 +1,4 @@
-videos/
+uploads/
+vendor/
+deploy.sh
 .env

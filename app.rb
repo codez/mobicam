@@ -4,9 +4,9 @@ require 'rubygems'
 require 'bundler'
 require 'fileutils'
 require 'tmpdir'
-require 'dotenv/load'
 
 Bundler.require
+require 'dotenv/load'
 
 ### SETUP
 
@@ -14,8 +14,8 @@ set :bind, '0.0.0.0'
 set :server, :puma
 set :haml, format: :html5
 
-VIDEO_DIR = ENV['VIDEO_DIR'] || './videos'
-FileUtils.mkdir_p(VIDEO_DIR)
+UPLOAD_DIR = ENV['UPLOAD_DIR'] || './uploads'
+FileUtils.mkdir_p(UPLOAD_DIR)
 
 ### ROUTES
 
@@ -25,18 +25,17 @@ get '/' do
 end
 
 post '/' do
-  if params[:video] && params[:video][:tempfile]
-    copy_video(params[:video][:tempfile], File.extname(params[:video][:filename]))
+  if params[:upload] && params[:upload][:tempfile]
+    copy_file(params[:upload][:tempfile], File.extname(params[:upload][:filename]))
   else
     haml :index
   end
 end
 
-
 ### HELPERS
 
 helpers do
-  def copy_video(stream, extension)
+  def copy_file(stream, extension)
     filename = Time.now.strftime('%Y%m%d%H%M%S') + extension
     tempfile = File.join(Dir.tmpdir, filename)
     File.open(tempfile, 'wb') do |f|
@@ -44,7 +43,7 @@ helpers do
         f.write(chunk)
       end
     end
-    FileUtils.mv(tempfile, File.join(VIDEO_DIR, filename))
+    FileUtils.mv(tempfile, File.join(UPLOAD_DIR, filename))
     201
   rescue => e
     logger.error(e)
