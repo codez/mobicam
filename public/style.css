@@ -108,6 +108,16 @@ h1 {
   top: 0;
 }
 
+.waiting .pie-wrapper .pie .half-circle {
+  animation-name: pulse;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+}
+
+.waiting .pie-wrapper .pie-bg {
+  display: none;
+}
+
 .success .pie-wrapper .pie .half-circle {
   border-color: green;
 }
@@ -138,9 +148,21 @@ h1 {
   vertical-align: super;
 }
 
-.pie-wrapper .shadow {
+.pie-wrapper .pie-bg {
   height: 100%;
   width: 100%;
   border: 20px solid #bdc3c7;
   border-radius: 50%;
+}
+
+@keyframes pulse {
+  0% {
+    border-color: rgba(0, 0, 0, 1);
+  }
+  50% {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    border-color: rgba(0, 0, 0, 1);
+  }
 }

@@ -102,6 +102,9 @@ const drawProgress = function (percent) {
   }
   el("left-side").style.transform = "rotate(" + percent * 3.6 + "deg)";
   el("progress-number").innerHTML = percent;
+  if (percent > 99) {
+    el("progress").className = "waiting";
+  }
 };
 
 const setCompleted = function (status) {
@@ -130,5 +133,8 @@ document.addEventListener("DOMContentLoaded", function (_event) {
   // Uncomment to debug progress pie
   // var percent = 0;
   // el("progress").style.display = "block";
-  // setInterval(() => drawProgress(percent++ % 100), 100);
+  // var iv = setInterval(() => {
+  //   drawProgress(percent++);
+  //   if (percent == 101) clearInterval(iv);
+  // }, 50);
 });
