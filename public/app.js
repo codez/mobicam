@@ -127,8 +127,17 @@ const setCompleted = function (status) {
   }, 5000);
 };
 
+// Add flickering effect for the lulz
+const flicker = function () {
+  document.body.style.background = "white";
+  setTimeout(() => (document.body.style.background = document.background), 50);
+  setTimeout(flicker, Math.random() * 10000);
+};
+
 document.addEventListener("DOMContentLoaded", function (_event) {
   el("file").addEventListener("change", prepareUpload, false);
+  document.background = document.body.background;
+  setTimeout(flicker, Math.random() * 10000);
 
   // Uncomment to debug progress pie
   // var percent = 0;
