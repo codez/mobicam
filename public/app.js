@@ -18,7 +18,6 @@ const scaleImage = async function (file) {
   // Get as image data
   const imageBitmap = await createImageBitmap(file);
   const [width, height] = getScaledDimensions(imageBitmap);
-  console.log(width, height);
   if (!width) return await new Promise((resolve) => resolve(file));
 
   // Draw to canvas
@@ -72,7 +71,6 @@ const uploadFile = function (file) {
 
   // file received/failed
   xhr.onreadystatechange = function (e) {
-    console.log(xhr);
     if (xhr.readyState === 4) {
       setCompleted(xhr.status);
     }
